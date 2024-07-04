@@ -41,6 +41,6 @@ describe('Catalog', function () {
         );
         
         
-        expect(names).toStrictEqual(productsNamesFromApi.filter(Boolean));
+        expect(names).toStrictEqual(productsNamesFromApi);
     });
 });

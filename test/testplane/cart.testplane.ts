@@ -21,13 +21,16 @@ describe('Cart', function () {
         expect(button).not.toBeNull();
     });
     
-    it('Add to cart, filling and sending form', async ({ browser }) => {
+    it('Add to cart, filling and successful checkout', async ({ browser }) => {
         const productId = 1;
         await browser.url(getURL(Page.Product + '/' + productId));
         
-        
-        const button = await browser.$('.ProductDetails-AddToCart');
-        await button.click();
+        try {
+            const button = await browser.$('.ProductDetails-AddToCart');
+            await button.click();
+        } catch (err) {
+            throw new Error('Product not found');
+        }
         
         await browser.url(getURL(Page.Cart));
         
