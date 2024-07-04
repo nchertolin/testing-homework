@@ -21,11 +21,12 @@ describe('Product', async function () {
         expect(await material.isDisplayed()).toBe(true);
     });
     
-    it('"Add to Cart" button must be large size', async ({ browser }) => {
+    it('"Add to Cart" button must be displays and has large size', async ({ browser }) => {
         await browser.url(getURL(Page.Product + '/1'));
         
         const button = await browser.$('.ProductDetails-AddToCart');
         
+        expect(await button.isDisplayed()).toBe(true);
         expect(await button.getAttribute('class')).toContain('btn-lg');
     });
     
