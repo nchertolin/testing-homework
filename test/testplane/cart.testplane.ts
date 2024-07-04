@@ -45,20 +45,23 @@ describe('Cart', function () {
             await phone.setValue('+79999999999');
             await address.setValue('New York, 1st street');
         } catch (err) {
-            throw new Error('Cart is empty');
+            throw new Error('Product not added to cart');
         }
         
         const submitButton = await browser.$('.Form-Submit');
         
         await submitButton.click();
         
-        const alert = await browser.$('.Cart-SuccessMessage');
-        await alert.waitForDisplayed();
-        // const success = await browser.$('.alert-success');
-        const classnames = await alert.getAttribute('class');
+        let classnames: string;
+        try {
+            const alert = await browser.$('.Cart-SuccessMessage');
+            await alert.waitForDisplayed();
+            classnames = await alert.getAttribute('class');
+        } catch (err) {
+            throw new Error('Form in not valid or checkout error');
+        }
         
         expect(classnames).toContain('alert-success');
-        
         
         const orderId = await browser.$('.Cart-Number');
         expect(await orderId.getText()).toBe('1');
