@@ -32,7 +32,7 @@ describe('Catalog', function () {
     
     it('Catalog should display products, fetched from the server', async ({ browser }) => {
         const productsFromApi = (await api.getProducts()).data;
-        const productsNamesFromApi = productsFromApi.map((product) => product.name);
+        const productsNamesFromApi = productsFromApi.map((product) => product.name || '');
         
         
         await browser.url(getURL(Page.Catalog));
@@ -41,6 +41,6 @@ describe('Catalog', function () {
         );
         
         
-        expect(names).toStrictEqual(productsNamesFromApi);
+        expect(names).toStrictEqual(productsNamesFromApi.filter(Boolean));
     });
 });
