@@ -21,7 +21,7 @@ describe('Cart', function () {
         expect(button).not.toBeNull();
     });
     
-    it('Add to cart, filling and successful checkout', async ({ browser }) => {
+    it('Add to cart, filling form and successful checkout', async ({ browser }) => {
         const productId = 1;
         await browser.url(getURL(Page.Product + '/' + productId));
         
